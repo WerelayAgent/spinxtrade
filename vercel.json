@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/app",
+      "destination": "/app/mint.html"
+    },
+    {
+      "source": "/app/mint",
+      "destination": "/app/mint.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ]
+}
