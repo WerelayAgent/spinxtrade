@@ -1,3 +1,3 @@
-# SpinXTrade (`$SPINX`)
+# SpinXTrade (`$SPINXT`)
 
-7,777 on-chain Spinner trading bots with dedicated ERC-6551 wallets on Robinhood Chain.
+7,777 autonomous Metaplex Core Spinner NFT trading bots with dedicated Solana PDA vaults and scoped Session Keys.

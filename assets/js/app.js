@@ -21,19 +21,19 @@
   // Copy CA button
   document.querySelectorAll('[data-copy-ca]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var text = 'Coming soon · Launching on Robinhood Chain';
+      var text = 'Coming soon · Launching on Solana (Pump.fun)';
       var parent = btn.closest('.flex');
       var span = parent ? parent.querySelector('span') : null;
       if (span && span.textContent.trim()) {
         text = span.textContent.trim();
       }
       if (text.toLowerCase().indexOf('coming soon') !== -1) {
-        showToast('CA coming soon — launching on Robinhood Chain');
+        showToast('CA coming soon — launching on Solana (Pump.fun)');
         return;
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () {
-          showToast('Copied $SPINX address');
+          showToast('Copied $SPINXT address');
         });
       } else {
         showToast('Copied: ' + text);
@@ -59,7 +59,7 @@
     var qty = 1;
     var maxQty = 10;
     var unitSpin = 10000;
-    var unitEth = 0.042;
+    var unitSol = 0.25;
     var mintedCount = 3888;
     var maxSupply = 7777;
     var walletConnected = false;
@@ -67,8 +67,8 @@
     var qtyEl = document.getElementById('mint-qty');
     var minusBtn = document.getElementById('qty-minus');
     var plusBtn = document.getElementById('qty-plus');
-    var totalSpinEl = document.getElementById('mint-total-spinx');
-    var totalEthEl = document.getElementById('mint-total-eth');
+    var totalSpinEl = document.getElementById('mint-total-spinxt');
+    var totalSolEl = document.getElementById('mint-total-sol');
     var mintedEl = document.getElementById('mint-count');
     var pctEl = document.getElementById('mint-pct');
     var barEl = document.getElementById('mint-bar');
@@ -102,16 +102,16 @@
       if (qtyEl) qtyEl.textContent = String(qty);
       if (minusBtn) minusBtn.disabled = qty <= 1;
       if (plusBtn) plusBtn.disabled = qty >= maxQty;
-      if (totalSpinEl) totalSpinEl.textContent = (qty * unitSpin).toLocaleString('en-US') + ' $SPINX';
-      if (totalEthEl) totalEthEl.textContent = '≈ ' + (qty * unitEth).toFixed(3) + ' ETH';
+      if (totalSpinEl) totalSpinEl.textContent = (qty * unitSpin).toLocaleString('en-US') + ' $SPINXT';
+      if (totalSolEl) totalSolEl.textContent = '≈ ' + (qty * unitSol).toFixed(2) + ' SOL';
       var pct = Math.min(100, (mintedCount / maxSupply) * 100);
       if (mintedEl) mintedEl.textContent = mintedCount.toLocaleString('en-US') + ' / ' + maxSupply.toLocaleString('en-US') + ' minted';
       if (pctEl) pctEl.textContent = Math.floor(pct) + '%';
       if (barEl) barEl.style.width = pct.toFixed(1) + '%';
       if (actionBtn) {
         actionBtn.textContent = walletConnected
-          ? 'Mint ' + qty + ' Spinner' + (qty > 1 ? 's' : '') + ' (' + (qty * unitSpin).toLocaleString('en-US') + ' $SPINX)'
-          : 'Connect Wallet to Mint';
+          ? 'Mint ' + qty + ' Spinner' + (qty > 1 ? 's' : '') + ' (' + (qty * unitSpin).toLocaleString('en-US') + ' $SPINXT)'
+          : 'Connect Phantom / Backpack to Mint';
       }
     }
 
@@ -137,10 +137,10 @@
         if (!walletConnected) {
           walletConnected = true;
           if (walletBadge) {
-            walletBadge.textContent = '0x71C9...9A4e · Robinhood Chain';
+            walletBadge.textContent = '7xK9...p9Q4 · Solana Mainnet';
             walletBadge.className = 'inline-flex items-center rounded-full border px-2.5 h-6 text-xs font-mono bg-up/15 text-up border-up/30';
           }
-          showToast('Wallet connected on Robinhood Chain');
+          showToast('Solana wallet connected');
           renderMint();
           return;
         }
@@ -158,8 +158,8 @@
           previewImg.alt = 'Spinner #' + num + ' (' + rolled.name + ')';
         }
         if (previewWallet) {
-          var hex = (Math.floor(Math.random() * 0xffff) + 0x1000).toString(16).toUpperCase();
-          previewWallet.textContent = 'ERC-6551 Wallet: 0xSPX' + hex + '...E6551 · Ready to brief';
+          var suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+          previewWallet.textContent = 'PDA Vault: 7pda' + suffix + '...SPXT · Ready to brief';
         }
         showToast('Preview minted Spinner #' + num + ' (' + rolled.name + ')!');
         renderMint();
